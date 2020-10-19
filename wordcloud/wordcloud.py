@@ -430,6 +430,11 @@ class WordCloud(object):
         img_array = np.asarray(img_grey)
         font_sizes, positions, orientations, colors = [], [], [], []
 
+        self.font_sizes = font_sizes
+        self.positions = positions
+        self.orientations = orientations
+        self.colors = colors
+
         last_freq = 1.
 
         if max_font_size is None:
@@ -476,7 +481,7 @@ class WordCloud(object):
             for i in range(times_extend):
                 frequencies.extend([(word, freq * downweight ** (i + 1))
                                     for word, freq in frequencies_org])
-
+        self.f =frequencies
         # start drawing grey image
         for word, freq in frequencies:
             if freq == 0:
