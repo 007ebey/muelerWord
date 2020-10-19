@@ -94,3 +94,4 @@ Use `wordcloud_cli --help` so see all available options.
 The wordcloud library is MIT licenced, but contains DroidSansMono.ttf, a true type font by Google, that is apache licensed.
 The font is by no means integral, and any other font can be used by setting the ``font_path`` variable when creating a ``WordCloud`` object.
 "# muelerWord" 
+"# muelerWord" 
