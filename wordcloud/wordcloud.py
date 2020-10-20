@@ -534,13 +534,15 @@ class WordCloud(object):
             positions.append((x, y))
             self.pos.append((x,y))
             orientations.append(orientation)
+            self.ori.append(orientation)
             font_sizes.append(font_size)
+            self.fon.append(font_size)
             colors.append(self.color_func(word, font_size=font_size,
                                           position=(x, y),
                                           orientation=orientation,
                                           random_state=random_state,
                                           font_path=self.font_path))
-                                        
+            self.col.append(colors[-1])
             # recompute integral image
             if self.mask is None:
                 img_array = np.asarray(img_grey)
