@@ -347,6 +347,7 @@ class WordCloud(object):
         self.pos = []
         self.fon = []
         self.col = []
+        self.ori = []
 
         if relative_scaling == "auto":
             if repeat:
@@ -480,7 +481,7 @@ class WordCloud(object):
             for i in range(times_extend):
                 frequencies.extend([(word, freq * downweight ** (i + 1))
                                     for word, freq in frequencies_org])
-        self.f =frequencies
+        
         # start drawing grey image
         for word, freq in frequencies:
             if freq == 0:
@@ -528,7 +529,6 @@ class WordCloud(object):
             # actually draw the text
             draw.text((y, x), word, fill="white", font=transposed_font)
             positions.append((x, y))
-            self.pos.append((x,y))
             orientations.append(orientation)
             font_sizes.append(font_size)
             colors.append(self.color_func(word, font_size=font_size,
@@ -536,7 +536,7 @@ class WordCloud(object):
                                           orientation=orientation,
                                           random_state=random_state,
                                           font_path=self.font_path))
-            self.col = colors[-1]                              
+                                        
             # recompute integral image
             if self.mask is None:
                 img_array = np.asarray(img_grey)
@@ -546,6 +546,12 @@ class WordCloud(object):
             # the order of the cumsum's is important for speed ?!
             occupancy.update(img_array, x, y)
             last_freq = freq
+        
+        
+        self.pos.extend(positions)
+        self.fon.extend(font_sizes)
+        self.col.extend(colors)  
+        self.ori.extend(orientations)
 
         self.layout_ = list(zip(frequencies, font_sizes, positions,
                                 orientations, colors))
