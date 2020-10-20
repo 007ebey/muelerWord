@@ -348,7 +348,7 @@ class WordCloud(object):
         self.fon = []
         self.col = []
         self.ori = []
-        self.f = None
+        self.f = []
 
         if relative_scaling == "auto":
             if repeat:
@@ -409,7 +409,7 @@ class WordCloud(object):
                              "got %d." % len(frequencies))
         frequencies = frequencies[:self.max_words]
 
-        self.f = frequencies
+        self.f.extend(frequencies)
 
         # largest entry will be 1
         max_frequency = float(frequencies[0][1])
