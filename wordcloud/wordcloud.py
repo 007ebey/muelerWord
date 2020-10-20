@@ -348,6 +348,7 @@ class WordCloud(object):
         self.fon = []
         self.col = []
         self.ori = []
+        self.f = None
 
         if relative_scaling == "auto":
             if repeat:
