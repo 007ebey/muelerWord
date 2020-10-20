@@ -408,6 +408,8 @@ class WordCloud(object):
                              "got %d." % len(frequencies))
         frequencies = frequencies[:self.max_words]
 
+        self.f = frequencies
+
         # largest entry will be 1
         max_frequency = float(frequencies[0][1])
 
@@ -529,6 +531,7 @@ class WordCloud(object):
             # actually draw the text
             draw.text((y, x), word, fill="white", font=transposed_font)
             positions.append((x, y))
+            self.pos.append((x,y))
             orientations.append(orientation)
             font_sizes.append(font_size)
             colors.append(self.color_func(word, font_size=font_size,
@@ -548,10 +551,7 @@ class WordCloud(object):
             last_freq = freq
         
         
-        self.pos.extend(positions)
-        self.fon.extend(font_sizes)
-        self.col.extend(colors)  
-        self.ori.extend(orientations)
+     
 
         self.layout_ = list(zip(frequencies, font_sizes, positions,
                                 orientations, colors))
