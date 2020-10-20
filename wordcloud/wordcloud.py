@@ -344,6 +344,9 @@ class WordCloud(object):
         self.background_color = background_color
         self.max_font_size = max_font_size
         self.mode = mode
+        self.pos = []
+        self.fon = []
+        self.col = []
 
         if relative_scaling == "auto":
             if repeat:
@@ -429,11 +432,7 @@ class WordCloud(object):
         draw = ImageDraw.Draw(img_grey)
         img_array = np.asarray(img_grey)
         font_sizes, positions, orientations, colors = [], [], [], []
-
-        self.font_sizes = font_sizes
-        self.positions = positions
-        self.orientations = orientations
-        self.colors = colors
+      
 
         last_freq = 1.
 
@@ -529,6 +528,7 @@ class WordCloud(object):
             # actually draw the text
             draw.text((y, x), word, fill="white", font=transposed_font)
             positions.append((x, y))
+            self.pos.append((x,y))
             orientations.append(orientation)
             font_sizes.append(font_size)
             colors.append(self.color_func(word, font_size=font_size,
@@ -536,6 +536,7 @@ class WordCloud(object):
                                           orientation=orientation,
                                           random_state=random_state,
                                           font_path=self.font_path))
+            self.col = colors[-1]                              
             # recompute integral image
             if self.mask is None:
                 img_array = np.asarray(img_grey)
